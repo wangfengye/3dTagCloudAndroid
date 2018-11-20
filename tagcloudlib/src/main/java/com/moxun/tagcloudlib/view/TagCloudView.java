@@ -48,10 +48,10 @@ public class TagCloudView extends ViewGroup implements Runnable, TagsAdapter.OnD
     private static final float TRACKBALL_SCALE_FACTOR = 10;
     private float speed = 2f;
     private TagCloud mTagCloud;
-    private float mAngleX;
-    private float mAngleY;
+    protected float mAngleX;
+    protected float mAngleY;
     private float centerX, centerY;
-    private float radius;
+    protected float radius;
     private float radiusPercent = 0.9f;
 
     private float[] darkColor = new float[]{1f, 0f, 0f, 1f};//rgba
@@ -71,8 +71,8 @@ public class TagCloudView extends ViewGroup implements Runnable, TagsAdapter.OnD
     private MarginLayoutParams layoutParams;
     private int minSize;
 
-    private boolean isOnTouch = false;
-    private Handler handler = new Handler(Looper.getMainLooper());
+    protected boolean isOnTouch = false;
+    protected Handler handler = new Handler(Looper.getMainLooper());
 
     private TagsAdapter tagsAdapter = new NOPTagsAdapter();
     private OnTagClickListener onTagClickListener;
@@ -92,7 +92,7 @@ public class TagCloudView extends ViewGroup implements Runnable, TagsAdapter.OnD
         init(context, attrs);
     }
 
-    private void init(Context context, AttributeSet attrs) {
+    protected void init(Context context, AttributeSet attrs) {
         setFocusableInTouchMode(true);
         mTagCloud = new TagCloud();
         if (attrs != null) {
@@ -324,24 +324,28 @@ public class TagCloudView extends ViewGroup implements Runnable, TagsAdapter.OnD
     }
 
     @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
+    public boolean dispatchTouchEvent(MotionEvent ev) {
         if (manualScroll) {
             handleTouchEvent(ev);
         }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+
         return false;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-        if (manualScroll) {
-            handleTouchEvent(e);
-        }
+
         return true;
     }
 
-    private float downX, downY;
+    protected float downX, downY;
 
-    private void handleTouchEvent(MotionEvent e) {
+    protected void handleTouchEvent(MotionEvent e) {
         switch (e.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 downX = e.getX();
@@ -364,12 +368,12 @@ public class TagCloudView extends ViewGroup implements Runnable, TagsAdapter.OnD
         }
     }
 
-    private boolean isValidMove(float dx, float dy) {
+    protected boolean isValidMove(float dx, float dy) {
         int minDistance = ViewConfiguration.get(getContext()).getScaledTouchSlop();
         return (Math.abs(dx) > minDistance || Math.abs(dy) > minDistance);
     }
 
-    private void processTouch() {
+    protected void processTouch() {
         if (mTagCloud != null) {
             mTagCloud.setAngleX(mAngleX);
             mTagCloud.setAngleY(mAngleY);
@@ -403,7 +407,7 @@ public class TagCloudView extends ViewGroup implements Runnable, TagsAdapter.OnD
             processTouch();
         }
 
-        handler.postDelayed(this, 50);
+        handler.postDelayed(this, 40);
     }
 
     public void setOnTagClickListener(OnTagClickListener listener) {

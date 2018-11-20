@@ -51,6 +51,14 @@ compile 'com.moxun:tagcloudlib:1.2.0'
 |起始颜色|app:lightColor|setLightColor(int color)|int
 |终止颜色|app:darkColor|setDarkColor(int color)|int  
 
+- FollowTagCloudViw(TagCloudView的子类,处理之前滑动动画不跟手的情况,用法基本一致,不同点如下)
+
+| 属性         | 代码 |值类型|
+|:------------: | :----:|:-:
+| 自动滚动      | setAutoScrollMode(int mode) | 禁用
+| 默认最低滚动速度  | setBaseSpeed(float speed) | float[0,10]
+
+
 
 ***
 欢迎提交PR
