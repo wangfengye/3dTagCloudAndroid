@@ -62,5 +62,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Using in Fragment" />
+    <android.support.v7.widget.AppCompatSpinner
+        android:layout_margin="4dp"
+        android:elevation="2dp"
+        android:gravity="center"
+        android:id="@+id/test_mode"
+        android:background="#c2c2c2"
+        android:padding="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/models"/>
 
 </LinearLayout>
