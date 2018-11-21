@@ -1,14 +1,14 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
+// apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.jfrog.bintray'
 
 version = "1.2.1"
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
     defaultConfig {
         minSdkVersion 11
-        targetSdkVersion 23
+        targetSdkVersion 27
         versionCode 1
         versionName version
     }
@@ -26,6 +26,7 @@ dependencies {
 def siteUrl = 'https://github.com/misakuo/3dTagCloudAndroid'      // 项目的主页
 def gitUrl = 'https://github.com/misakuo/3dTagCloudAndroid.git'   // Git仓库的url
 group = "com.moxun" // Maven Group ID for the artifact，一般填你唯一的包名
+/*
 install {
     repositories.mavenInstaller {
         // This generates POM.xml with proper parameters
@@ -58,6 +59,7 @@ install {
         }
     }
 }
+*/
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
@@ -86,7 +88,7 @@ if(file != null && file.exists()) {
     properties.put("bintray.apikey",System.getenv("TOKEN"))
 }
 
-bintray {
+/*bintray {
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
     configurations = ['archives']
@@ -98,4 +100,4 @@ bintray {
         licenses = ["MIT"]
         publish = true
     }
-}
+}*/
