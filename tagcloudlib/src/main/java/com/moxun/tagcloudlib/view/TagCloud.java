@@ -176,14 +176,19 @@ public class TagCloud {
         //distribute: (disrtEven is used to specify whether distribute random or even
         for (int i = 1; i < max + 1; i++) {
             if (distrEven) {
-                phi = Math.acos(-1.0 + (2.0 * i - 1.0) / max);
-                theta = Math.sqrt(max * Math.PI) * phi;
+
+                phi = Math.acos(-1.0 + (2.0 * i - 1.0) / max);//θ维度 弧度范围[ -PI~PI]
+                theta = Math.sqrt(max * Math.PI) * phi;//φ经度
             } else {
                 phi = Math.random() * (Math.PI);
                 theta = Math.random() * (2 * Math.PI);
             }
 
             //coordinate conversion:
+            //球面公式  r:半径 θ:维度,φ经度
+            //X=rsinθcosφ
+            //Y=rsinθsinφ
+            //Z=rcosθ
             tagCloud.get(i - 1).setLocX((int) ((radius * Math.cos(theta) * Math.sin(phi))
             ));
             tagCloud.get(i - 1).setLocY((int) (radius * Math.sin(theta) * Math.sin(phi)));
